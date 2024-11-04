@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Time Zones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+  </head>
+  <style>
+    select {
+      width: 300px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: lightblue;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    option {
+      padding: 10px;
+      background-color: white;
+    }
+  </style>
+  <body>
+    <select name="country" id="country">
+      <option value="">Select a city</option>
+      <option value="Australia/Sydney">Sydney</option>
+      <option value="Europe/Lisbon">Lisbon</option>
+      <option value="America/Sao_Paulo">Sao_Paulo</option>
+    </select>
+
+    <script>
+      function selectedCountry(event) {
+        let timeZone = event.target.value;
+
+        if (timeZone) {
+          let currentTime = moment()
+            .tz(timeZone)
+            .format("dddd, MMMM Do YYYY, h:mm A");
+          alert(
+            `The current time in ${
+              event.target.options[event.target.selectedIndex].text
+            } is ${currentTime}`
+          );
+        }
+      }
+
+      let countrySelect = document.getElementById("country");
+      countrySelect.addEventListener("change", selectedCountry);
+    </script>
+  </body>
+</html>
